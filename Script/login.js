@@ -29,7 +29,7 @@ async function login(event) {
         });
         if (response.ok) {
             // No need to handle the token, as it's stored in a cookie
-            window.location.href = "../index.html";
+            window.location.href = "./index.html";
         } else {
             const errorData = await response.json();
             alert(errorData.message);
