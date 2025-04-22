@@ -20,7 +20,7 @@ form.addEventListener('submit', async (event) => {
     formData.append('image', resizedBlob, file.name); // Pass resized blob
     formData.append('description', document.getElementById('descriptionInput').value);
     try {
-        const response = await fetch('http://localhost:3000/api/awardsCertificates', {
+        const response = await fetch('https://dh-ganderbal-backend.onrender.com/api/awardsCertificates', {
             method: 'POST',
             body: formData,
             credentials: 'include',
@@ -80,7 +80,7 @@ function resizeImage(file, maxSize) {
 }
 
 export function loadAllawardsCertificatesEntries() {
-    fetch('http://localhost:3000/api/awardsCertificates') // Adjusted the endpoint to match the backend route
+    fetch('https://dh-ganderbal-backend.onrender.com/api/awardsCertificates') // Adjusted the endpoint to match the backend route
         .then(res => res.json())
         .then(data => {
             data.forEach(entry => awardsCertificatesEntry(entry)); // Assuming you have a function to display the entries
@@ -100,7 +100,7 @@ function awardsCertificatesEntry(entry) {
     item.style.gap = '10px';
     item.style.marginTop = '10px';
     item.innerHTML = `
-        <img src="http://localhost:3000${entry.imagePath}" class="passport" alt="Image" />
+        <img src="https://dh-ganderbal-backend.onrender.com${entry.imagePath}" class="passport" alt="Image" />
         <div>
             <p><strong>Description:</strong> ${entry.description}</p>
         </div>
@@ -115,7 +115,7 @@ window.deleteawardsCertificatesEntry = function (id) {
     const confirmDelete = confirm("Are you sure you want to delete this entry?");
     if (!confirmDelete) return;
 
-    fetch(`http://localhost:3000/api/awardsCertificates/${id}`, {
+    fetch(`https://dh-ganderbal-backend.onrender.com/api/awardsCertificates/${id}`, {
         method: 'DELETE',
         credentials: 'include',
     })

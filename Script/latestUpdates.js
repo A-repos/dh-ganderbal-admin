@@ -24,7 +24,7 @@ form.addEventListener('submit', function (event) {
    FUNCTION: Load all updates from backend and display on page
 ============================================================ */
 export function loadAllPDFUpdates() {
-    fetch('http://localhost:3000/api/latest-updates')
+    fetch('https://dh-ganderbal-backend.onrender.com/api/latest-updates')
         .then(res => res.json())
         .then(data => {
             data.forEach(entry => displayPDFUpdate(entry));
@@ -43,7 +43,7 @@ function uploadPDFUpdate(description, pdfFile) {
     formData.append('title', description);
     formData.append('pdf', pdfFile);
 
-    fetch('http://localhost:3000/api/latest-updates', {
+    fetch('https://dh-ganderbal-backend.onrender.com/api/latest-updates', {
         method: 'POST',
         body: formData,
         credentials: 'include',
@@ -82,7 +82,7 @@ function displayPDFUpdate(entry) {
     item.className = 'data-entry';
     item.innerHTML = `
     <p>
-      <a href="http://localhost:3000${entry.filepath}" style="text-decoration:none" download>${entry.title}</a>
+      <a href="https://dh-ganderbal-backend.onrender.com${entry.filepath}" style="text-decoration:none" download>${entry.title}</a>
       <button onclick="deletePDFUpdate(${entry.id})" style="margin-left:10px;">Delete</button>
     </p>
   `;
@@ -97,7 +97,7 @@ window.deletePDFUpdate = function (id) {
     const confirmDelete = confirm('Are you sure you want to delete this PDF?');
     if (!confirmDelete) return;
 
-    fetch(`http://localhost:3000/api/latest-updates/${id}`, {
+    fetch(`https://dh-ganderbal-backend.onrender.com/api/latest-updates/${id}`, {
         method: 'DELETE',
         credentials: 'include',
     })

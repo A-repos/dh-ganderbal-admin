@@ -16,7 +16,7 @@ async function login(event) {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     try {
-        const response = await fetch('http://localhost:3000/api/login', {
+        const response = await fetch('https://dh-ganderbal-backend.onrender.com/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ async function login(event) {
         });
         if (response.ok) {
             // No need to handle the token, as it's stored in a cookie
-            window.location.href = "http://localhost:5500/Frontend/Admin/index.html";
+            window.location.href = "./index.html";
         } else {
             const errorData = await response.json();
             alert(errorData.message);

@@ -26,7 +26,7 @@ form.addEventListener('submit', async (event) => {
     formData.append('designation', document.getElementById('designationInput').value);
 
     try {
-        const response = await fetch('http://localhost:3000/api/management', {
+        const response = await fetch('https://dh-ganderbal-backend.onrender.com/api/management', {
             method: 'POST',
             body: formData,
             credentials: 'include',
@@ -73,7 +73,7 @@ function resizeImage(file, maxWidth) {
 }
 
 export function loadAllManagementEntries() {
-    fetch('http://localhost:3000/api/management') // Adjusted the endpoint to match the backend route
+    fetch('https://dh-ganderbal-backend.onrender.com/api/management') // Adjusted the endpoint to match the backend route
         .then(res => res.json())
         .then(data => {
             data.forEach(entry => displayManagementEntry(entry)); // Assuming you have a function to display the entries
@@ -93,7 +93,7 @@ function displayManagementEntry(entry) {
     item.style.gap = '10px';
     item.style.marginTop = '10px';
     item.innerHTML = `
-        <img src="http://localhost:3000${entry.imagePath}" class="passport" alt="Image" />
+        <img src="https://dh-ganderbal-backend.onrender.com${entry.imagePath}" class="passport" alt="Image" />
         <div>
             <p><strong>Name:</strong> ${entry.name}</p>
             <p><strong>Education:</strong> ${entry.education}</p>
@@ -110,7 +110,7 @@ window.deleteManagementEntry = function (id) {
     const confirmDelete = confirm("Are you sure you want to delete this entry?");
     if (!confirmDelete) return;
 
-    fetch(`http://localhost:3000/api/management/${id}`, {
+    fetch(`https://dh-ganderbal-backend.onrender.com/api/management/${id}`, {
         method: 'DELETE',
         credentials: 'include',
     })
