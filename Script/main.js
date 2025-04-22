@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", () => {
         } catch (err) {
             console.error("Logout failed, but continuing to redirect.");
         }
-    
+
         window.location.href = '../login.html';
     });
 
@@ -26,6 +26,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // Check if user is logged in using cookie
 function checkLoginStatus() {
+    fetch('https://dh-ganderbal-backend.onrender.com/api/debug-cookie', {
+        credentials: 'include'
+    })
+        .then(res => res.json())
+        .then(console.log);
+
     fetch('https://dh-ganderbal-backend.onrender.com/api/protected-endpoint', {
         method: 'GET',
         headers: {
