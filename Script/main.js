@@ -19,7 +19,7 @@ window.addEventListener("DOMContentLoaded", () => {
             console.error("Logout failed, but continuing to redirect.");
         }
 
-        window.location.href = './login.html';
+        window.location.href = './index.html';
     });
 
 });
@@ -50,6 +50,6 @@ function checkLoginStatus() {
         .catch(error => {
             console.error('Error fetching protected data:', error);
             alert('Session expired or unauthorized. Please login again.');
-            window.location.href = './login.html';
+            window.location.href = './index.html';
         });
 }
