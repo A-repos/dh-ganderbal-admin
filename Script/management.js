@@ -47,7 +47,6 @@ form.addEventListener('submit', async (event) => {
     }
 });
 
-
 // 🖼️ Image resizing using canvas
 function resizeImage(file, maxWidth) {
     return new Promise((resolve) => {
