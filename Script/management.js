@@ -39,7 +39,7 @@ form.addEventListener('submit', async (event) => {
 
         alert("Entry added successfully!");
         form.reset();
-        displayManagementEntry(result.entry);
+        displayManagementEntry(result);
 
     } catch (error) {
         console.error("Upload error:", error);
