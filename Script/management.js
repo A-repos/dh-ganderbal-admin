@@ -109,7 +109,7 @@ function displayManagementEntry(entry) {
 }
 
 // Function to delete the management entry from the server
-window.deleteManagementEntry = function (id) {
+function actualDeleteManagementEntry(id) {
     const confirmDelete = confirm("Are you sure you want to delete this entry?");
     if (!confirmDelete) return;
 
@@ -138,3 +138,4 @@ window.deleteManagementEntry = function (id) {
         });
 }
 
+window.deleteManagementEntry = debounce(actualDeleteManagementEntry, 1000);
