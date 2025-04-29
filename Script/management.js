@@ -1,8 +1,8 @@
 const form = document.getElementById('managementForm');
 const imageInput = document.getElementById('imageInput');
 const list = document.getElementById('managementList');
-import { debounce } from './debounce.js';
-async function handleFormSubmit(event) {
+
+form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const file = imageInput.files[0];
@@ -45,7 +45,7 @@ async function handleFormSubmit(event) {
         console.error("Upload error:", error);
         alert("Something went wrong while uploading.");
     }
-};
+});
 
 
 // 🖼️ Image resizing using canvas
@@ -72,8 +72,6 @@ function resizeImage(file, maxWidth) {
         reader.readAsDataURL(file);
     });
 }
-
-form.addEventListener('submit', debounce(handleFormSubmit, 1000));
 
 export function loadAllManagementEntries() {
     fetch('https://dh-ganderbal-backend.onrender.com/api/management') // Adjusted the endpoint to match the backend route
@@ -109,7 +107,7 @@ function displayManagementEntry(entry) {
 }
 
 // Function to delete the management entry from the server
-function actualDeleteManagementEntry(id) {
+window.deleteManagementEntry = function (id) {
     const confirmDelete = confirm("Are you sure you want to delete this entry?");
     if (!confirmDelete) return;
 
@@ -138,4 +136,3 @@ function actualDeleteManagementEntry(id) {
         });
 }
 
-window.deleteManagementEntry = debounce(actualDeleteManagementEntry, 1000);
