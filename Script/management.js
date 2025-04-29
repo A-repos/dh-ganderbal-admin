@@ -1,8 +1,8 @@
 const form = document.getElementById('managementForm');
 const imageInput = document.getElementById('imageInput');
 const list = document.getElementById('managementList');
-
-form.addEventListener('submit', async (event) => {
+import { debounce } from './debounce.js';
+async function handleFormSubmit(event) {
     event.preventDefault();
 
     const file = imageInput.files[0];
@@ -39,13 +39,14 @@ form.addEventListener('submit', async (event) => {
 
         alert("Entry added successfully!");
         form.reset();
-        // displayManagementEntry(result.entry);
+        displayManagementEntry(result.entry);
 
     } catch (error) {
         console.error("Upload error:", error);
         alert("Something went wrong while uploading.");
     }
-});
+};
+
 
 // 🖼️ Image resizing using canvas
 function resizeImage(file, maxWidth) {
@@ -72,6 +73,8 @@ function resizeImage(file, maxWidth) {
     });
 }
 
+form.addEventListener('submit', debounce(handleFormSubmit, 1000));
+
 export function loadAllManagementEntries() {
     fetch('https://dh-ganderbal-backend.onrender.com/api/management') // Adjusted the endpoint to match the backend route
         .then(res => res.json())
@@ -93,7 +96,7 @@ function displayManagementEntry(entry) {
     item.style.gap = '10px';
     item.style.marginTop = '10px';
     item.innerHTML = `
-        <img src="https://dh-ganderbal-backend.onrender.com${entry.imagePath}" class="passport" alt="Image" />
+        <img src="${entry.imageUrl}" class="passport" alt="Image" />
         <div>
             <p><strong>Name:</strong> ${entry.name}</p>
             <p><strong>Education:</strong> ${entry.education}</p>
