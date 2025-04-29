@@ -1,3 +1,5 @@
+//Before moving to firebase 
+
 import { initOPD } from './opd.js';
 import { initEMG } from './emg.js';
 import { loadAllPDFUpdates } from './latestUpdates.js';
