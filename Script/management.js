@@ -76,6 +76,7 @@ export function loadAllManagementEntries() {
     fetch('https://dh-ganderbal-backend.onrender.com/api/management') // Adjusted the endpoint to match the backend route
         .then(res => res.json())
         .then(data => {
+            list.innerHTML = '';
             data.forEach(entry => displayManagementEntry(entry)); // Assuming you have a function to display the entries
         })
         .catch(error => {
@@ -83,6 +84,7 @@ export function loadAllManagementEntries() {
             alert('Failed to load management entries.');
         });
 }
+
 
 // Function to display the management entry along with the delete button
 function displayManagementEntry(entry) {
