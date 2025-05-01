@@ -32,7 +32,6 @@ form.addEventListener('submit', async (event) => {
 
         alert("Entry added successfully!");
         form.reset();
-        loadAllawardsCertificatesEntries()
 
     } catch (error) {
         console.error("Upload error:", error);
