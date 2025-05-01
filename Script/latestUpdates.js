@@ -64,7 +64,7 @@ function uploadPDFUpdate(description, pdfFile) {
             }
 
             alert('PDF uploaded successfully!');
-            displayPDFUpdate(result.data.entry); // Show new update on page
+            displayPDFUpdate(entry); // Show new update on page
             form.reset(); // Clear form inputs
         })
         .catch(error => {
@@ -82,7 +82,7 @@ function displayPDFUpdate(entry) {
     item.className = 'data-entry';
     item.innerHTML = `
     <p>
-      <a href="https://dh-ganderbal-backend.onrender.com${entry.filepath}" style="text-decoration:none" download>${entry.title}</a>
+      <a href="https://dh-ganderbal-backend.onrender.com${entry.PDFfileUrl}" style="text-decoration:none" download>${entry.title}</a>
       <button onclick="deletePDFUpdate(${entry.id})" style="margin-left:10px;">Delete</button>
     </p>
   `;
