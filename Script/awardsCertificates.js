@@ -12,10 +12,11 @@ form.addEventListener('submit', async (event) => {
         return;
     }
 
-    const resizedBlob = await resizeImage(file, 1024); // resize to 800px width (maintains aspect ratio)
+    // const resizedBlob = await resizeImage(file, 1024); 
+    // resize to 800px width (maintains aspect ratio)
 
     const formData = new FormData();
-    formData.append('image', resizedBlob, file.name); // Pass resized blob
+    formData.append('image', file, file.name); // Pass resized blob
     formData.append('description', document.getElementById('descriptionInput').value);
     try {
         const response = await fetch('https://dh-ganderbal-backend.onrender.com/api/awardsCertificates', {
