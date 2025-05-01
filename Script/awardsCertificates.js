@@ -25,13 +25,22 @@ form.addEventListener('submit', async (event) => {
             credentials: 'include',
         });
 
-        const result = await response.json();
+        console.log('Response Status:', response.status); // Log status code
+        const responseText = await response.text(); // Get the raw response text
+        console.log('Response Body:', responseText); // Log response body
+
+        // Try to parse the response as JSON
+        const result = JSON.parse(responseText);  // Explicitly parse it
+        if (!response.ok) {
+            throw new Error(result.error || "Upload failed");
+        }
         if (!response.ok) {
             throw new Error(result.error || "Upload failed");
         }
 
         alert("Entry added successfully!");
         form.reset();
+        loadAllawardsCertificatesEntries();
 
     } catch (error) {
         console.error("Upload error:", error);
