@@ -12,11 +12,10 @@ form.addEventListener('submit', async (event) => {
         return;
     }
 
-    // const resizedBlob = await resizeImage(file, 1024); 
-    // resize to 800px width (maintains aspect ratio)
+    const resizedBlob = await resizeImage(file, 1024); // resize to 800px width (maintains aspect ratio)
 
     const formData = new FormData();
-    formData.append('image', file, file.name); // Pass resized blob
+    formData.append('image', resizedBlob, file.name); // Pass resized blob
     formData.append('description', document.getElementById('descriptionInput').value);
     try {
         const response = await fetch('https://dh-ganderbal-backend.onrender.com/api/awardsCertificates', {
@@ -25,22 +24,14 @@ form.addEventListener('submit', async (event) => {
             credentials: 'include',
         });
 
-        console.log('Response Status:', response.status); // Log status code
-        const responseText = await response.text(); // Get the raw response text
-        console.log('Response Body:', responseText); // Log response body
-
-        // Try to parse the response as JSON
-        const result = JSON.parse(responseText);  // Explicitly parse it
-        if (!response.ok) {
-            throw new Error(result.error || "Upload failed");
-        }
+        const result = await response.json();
         if (!response.ok) {
             throw new Error(result.error || "Upload failed");
         }
 
         alert("Entry added successfully!");
         form.reset();
-        loadAllawardsCertificatesEntries();
+        loadAllawardsCertificatesEntries()
 
     } catch (error) {
         console.error("Upload error:", error);
