@@ -17,6 +17,7 @@ form.addEventListener('submit', async (event) => {
     const formData = new FormData();
     formData.append('image', resizedBlob, file.name); // Pass resized blob
     formData.append('description', document.getElementById('descriptionInput').value);
+    console.log('Description:', document.getElementById('descriptionInput').value);
     try {
         const response = await fetch('https://dh-ganderbal-backend.onrender.com/api/awardsCertificates', {
             method: 'POST',
