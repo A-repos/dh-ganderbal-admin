@@ -1,5 +1,3 @@
-
-
 const form = document.getElementById('awardscertificatesForm');
 const awardimageInput = document.getElementById('awardimageInput');
 const list = document.getElementById('awardscertificateList');
@@ -33,7 +31,7 @@ form.addEventListener('submit', async (event) => {
 
         alert("Entry added successfully!");
         form.reset();
-        awardsCertificatesEntry(result.entry);
+        loadAllawardsCertificatesEntries()
 
     } catch (error) {
         console.error("Upload error:", error);
@@ -83,6 +81,7 @@ export function loadAllawardsCertificatesEntries() {
     fetch('https://dh-ganderbal-backend.onrender.com/api/awardsCertificates') // Adjusted the endpoint to match the backend route
         .then(res => res.json())
         .then(data => {
+            list.innerHTML = '';
             data.forEach(entry => awardsCertificatesEntry(entry)); // Assuming you have a function to display the entries
         })
         .catch(error => {
@@ -100,7 +99,7 @@ function awardsCertificatesEntry(entry) {
     item.style.gap = '10px';
     item.style.marginTop = '10px';
     item.innerHTML = `
-        <img src="https://dh-ganderbal-backend.onrender.com${entry.imagePath}" class="passport" alt="Image" />
+        <img src="https://dh-ganderbal-backend.onrender.com${entry.imageUrl}" class="passport" alt="Image" />
         <div>
             <p><strong>Description:</strong> ${entry.description}</p>
         </div>
