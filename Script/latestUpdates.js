@@ -27,6 +27,7 @@ export function loadAllPDFUpdates() {
     fetch('https://dh-ganderbal-backend.onrender.com/api/latest-updates')
         .then(res => res.json())
         .then(data => {
+            list.innerHTML='';
             data.forEach(entry => displayPDFUpdate(entry));
         })
         .catch(error => {
@@ -64,8 +65,8 @@ function uploadPDFUpdate(description, pdfFile) {
             }
 
             alert('PDF uploaded successfully!');
-            displayPDFUpdate(entry); // Show new update on page
             form.reset(); // Clear form inputs
+            loadAllPDFUpdates() // Show new update on page
         })
         .catch(error => {
             console.error('Upload error:', error);
@@ -78,12 +79,12 @@ function uploadPDFUpdate(description, pdfFile) {
 ============================================================ */
 function displayPDFUpdate(entry) {
     const item = document.createElement('div');
-    item.id = `update-${entry.id}`;
+    item.id = entry._id; 
     item.className = 'data-entry';
     item.innerHTML = `
     <p>
       <a href="https://dh-ganderbal-backend.onrender.com${entry.PDFfileUrl}" style="text-decoration:none" download>${entry.title}</a>
-      <button onclick="deletePDFUpdate(${entry.id})" style="margin-left:10px;">Delete</button>
+      <button onclick="deletePDFUpdate(${entry._id})" style="margin-left:10px;">Delete</button>
     </p>
   `;
 
@@ -101,16 +102,24 @@ window.deletePDFUpdate = function (id) {
         method: 'DELETE',
         credentials: 'include',
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Delete failed');
-            }
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to delete the PDF.");
+        }
+        return response.json();
+    })
+    .then(() => {
+        // Remove the entry from the UI
+        const entryElement = document.getElementById(id);
+        if (entryElement) {
+            entryElement.remove();
+        }
 
-            document.getElementById(`update-${id}`).remove(); // Remove the div with this ID from the page from page
-            alert('Deleted successfully!');
-        })
-        .catch(error => {
-            console.error('Delete error:', error);
-            alert('Failed to delete PDF.');
-        });
+        alert("PDF deleted successfully!");
+    })
+    .catch(error => {
+        console.error("Delete error:", error);
+        alert("Something went wrong while deleting the entry.");
+    });
 };
+
