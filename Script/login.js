@@ -5,7 +5,6 @@ window.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
             login(event);
-            disablelgnButton(loginBtn);
         }
     });
 });
