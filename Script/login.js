@@ -1,9 +1,7 @@
 import { disablelgnButton, enableButton } from './button.js';
 window.addEventListener("DOMContentLoaded", () => {
     const loginBtn = document.getElementById("login-btn");
-    disablelgnButton(loginBtn);
     loginBtn.addEventListener("click", login);
-
     document.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
             login(event);
@@ -15,6 +13,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 async function login(event) {
     event.preventDefault();
+    disablelgnButton(loginBtn);
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     try {
