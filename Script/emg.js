@@ -67,23 +67,24 @@ function renderEMG(data) {
     const list = document.getElementById('emgDataList');
     list.innerHTML = '';
 
-    data.forEach((entry, index) => {
+    data.forEach((entry) => {
         const div = document.createElement('div');
         div.className = 'data-entry';
+        div.setAttribute('data-id', entry._id);
         div.innerHTML = `
         <span><strong>Dept:</strong> ${entry.dept}</span>
         <span><strong>Room:</strong> ${entry.room}</span>
         <span><strong>Schedule:</strong> ${entry.schedule}</span>
-        <button onClick="deleteEntryEMG(${index})">Delete</button>`;
+        <button onClick="deleteEntryEMG(${entry._id})">Delete</button>`;
         list.appendChild(div);
     });
 }
 
 //Delete and OPD entry
-window.deleteEntryEMG = function (index) {
+window.deleteEntryEMG = function (id) {
     const confirmDelete = confirm('Are you sure you want to delete this PDF?');
     if (!confirmDelete) return;
-    fetch(`https://dh-ganderbal-backend.onrender.com/api/emg/${index}`,
+    fetch(`https://dh-ganderbal-backend.onrender.com/api/emg/${id}`,
         { method: 'Delete',
             credentials: 'include',
          })
