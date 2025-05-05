@@ -1,13 +1,13 @@
-// Get references to form and list container
+import { disableButton, enableButton } from './button.js';
 const form = document.getElementById('latestUpdatesForm');
 const list = document.getElementById('latestUpdatesList');
-
+const submitBtn = document.getElementsByClassName('button');
 // 👉 Start by loading all saved PDF updates when page loads
 
 // 📤 Handle form submission when admin uploads a new PDF
 form.addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent page reload
-
+    disableButton(submitBtn);
     const description = document.getElementById('title').value;
     const pdfFile = document.getElementById('pdf').files[0];
 
@@ -27,7 +27,7 @@ export function loadAllPDFUpdates() {
     fetch('https://dh-ganderbal-backend.onrender.com/api/latest-updates')
         .then(res => res.json())
         .then(data => {
-            list.innerHTML='';
+            list.innerHTML = '';
             data.forEach(entry => displayPDFUpdate(entry));
         })
         .catch(error => {
@@ -71,6 +71,9 @@ function uploadPDFUpdate(description, pdfFile) {
         .catch(error => {
             console.error('Upload error:', error);
             alert('Something went wrong while uploading.');
+        })
+        .finally(() => {
+            enableButton(submitBtn);
         });
 }
 
@@ -79,7 +82,7 @@ function uploadPDFUpdate(description, pdfFile) {
 ============================================================ */
 function displayPDFUpdate(entry) {
     const item = document.createElement('div');
-    item.id = entry._id; 
+    item.id = entry._id;
     item.className = 'data-entry';
     item.innerHTML = `
     <p>
@@ -102,24 +105,24 @@ window.deletePDFUpdate = function (id) {
         method: 'DELETE',
         credentials: 'include',
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Failed to delete the PDF.");
-        }
-        return response.json();
-    })
-    .then(() => {
-        // Remove the entry from the UI
-        const entryElement = document.getElementById(id);
-        if (entryElement) {
-            entryElement.remove();
-        }
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to delete the PDF.");
+            }
+            return response.json();
+        })
+        .then(() => {
+            // Remove the entry from the UI
+            const entryElement = document.getElementById(id);
+            if (entryElement) {
+                entryElement.remove();
+            }
 
-        alert("PDF deleted successfully!");
-    })
-    .catch(error => {
-        console.error("Delete error:", error);
-        alert("Something went wrong while deleting the entry.");
-    });
+            alert("PDF deleted successfully!");
+        })
+        .catch(error => {
+            console.error("Delete error:", error);
+            alert("Something went wrong while deleting the entry.");
+        });
 };
 
