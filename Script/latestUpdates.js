@@ -1,7 +1,7 @@
 import { disableButton, enableButton } from './button.js';
 const form = document.getElementById('latestUpdatesForm');
 const list = document.getElementById('latestUpdatesList');
-const submitBtn = document.getElementsByClassName('button');
+const submitBtn = document.getElementById('updt_button');
 // 👉 Start by loading all saved PDF updates when page loads
 
 // 📤 Handle form submission when admin uploads a new PDF

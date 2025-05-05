@@ -2,7 +2,7 @@ import { disableButton, enableButton } from './button.js';
 const form = document.getElementById('awardscertificatesForm');
 const awardimageInput = document.getElementById('awardimageInput');
 const list = document.getElementById('awardscertificateList');
-const submitBtn = document.getElementsByClassName('button');
+const submitBtn = document.getElementById('awd_button');
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
     disableButton(submitBtn);

@@ -2,7 +2,7 @@ import { disableButton, enableButton } from './button.js';
 const form = document.getElementById('managementForm');
 const imageInput = document.getElementById('imageInput');
 const list = document.getElementById('managementList');
-const submitBtn = document.getElementsByClassName('button');
+const submitBtn = document.getElementById('mgmt_button');
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
