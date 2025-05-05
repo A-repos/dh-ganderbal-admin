@@ -1,11 +1,13 @@
+import { disablelgnButton, enableButton } from './button.js';
 window.addEventListener("DOMContentLoaded", () => {
     const loginBtn = document.getElementById("login-btn");
-
+    disablelgnButton(loginBtn);
     loginBtn.addEventListener("click", login);
 
     document.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
             login(event);
+            disablelgnButton(loginBtn);
         }
     });
 });
@@ -33,10 +35,12 @@ async function login(event) {
         } else {
             const errorData = await response.json();
             alert(errorData.message);
+            enableButton(loginBtn);
         }
     } catch (error) {
         console.error(error);
         alert('Login error: ' + error.message);
+        enableButton(loginBtn);
     }
 }
 
