@@ -1,10 +1,12 @@
+import { disableButton, enableButton } from './button.js';
 const form = document.getElementById('managementForm');
 const imageInput = document.getElementById('imageInput');
 const list = document.getElementById('managementList');
+const submitBtn = document.getElementsByClassName('button');
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
-
+    disableButton(submitBtn);
     const file = imageInput.files[0];
 
     if (!file) {
@@ -44,7 +46,9 @@ form.addEventListener('submit', async (event) => {
     } catch (error) {
         console.error("Upload error:", error);
         alert("Something went wrong while uploading.");
-    }
+    }finally {
+            enableButton(submitBtn);
+          }
 });
 
 // 🖼️ Image resizing using canvas
