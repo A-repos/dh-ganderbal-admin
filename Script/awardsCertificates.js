@@ -99,7 +99,7 @@ function awardsCertificatesEntry(entry) {
     item.style.gap = '10px';
     item.style.marginTop = '10px';
     item.innerHTML = `
-        <img src="https://dh-ganderbal-backend.onrender.com${entry.imageUrl_2}" class="passport" alt="Image" />
+        <img src="${entry.imageUrl_2}" class="passport" alt="Image" />
         <div>
             <p><strong>Description:</strong> ${entry.description}</p>
         </div>
