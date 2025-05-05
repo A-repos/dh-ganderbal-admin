@@ -86,7 +86,7 @@ function displayPDFUpdate(entry) {
     item.className = 'data-entry';
     item.innerHTML = `
     <p>
-      <a href="https://dh-ganderbal-backend.onrender.com${entry.PDFfileUrl}" style="text-decoration:none" download>${entry.title}</a>
+      <a href="${entry.PDFfileUrl}" style="text-decoration:none" download>${entry.title}</a>
       <button onclick="deletePDFUpdate('${entry._id}')" style="margin-left:10px;">Delete</button>
     </p>
   `;
