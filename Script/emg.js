@@ -75,7 +75,7 @@ function renderEMG(data) {
         <span><strong>Dept:</strong> ${entry.dept}</span>
         <span><strong>Room:</strong> ${entry.room}</span>
         <span><strong>Schedule:</strong> ${entry.schedule}</span>
-        <button onClick="deleteEntryEMG(${entry._id})">Delete</button>`;
+        <button onClick="deleteEntryEMG('${entry._id}')">Delete</button>`;
         list.appendChild(div);
     });
 }
